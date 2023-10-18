@@ -7,4 +7,4 @@ I computed for each file the first three moments, then I fitted the samples agai
 - The Weibull and the Pareto distributions with the method of moments.
 - The two stage Hyper-Exponential and the two stage Hypo-Exponential distributions using the maximum likelihood technique.
 
-The plotted figures are the comparisons for each trace of the empirical CDF of the samples with the real CDF of the distribution.
+The plotted figures are the comparisons for each trace of the empirical CDF of the samples with the CDF of the distributions, with the parameters obtained from the corresponding fitting procedures.
