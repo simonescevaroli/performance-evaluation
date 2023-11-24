@@ -1,4 +1,4 @@
-## Visits, Throughput and Demands
+## Open Models
 
 Considering a web application, described in the following image:
 
