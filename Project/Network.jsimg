@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ProjectFlow.jsimg" timestamp="Sat Jan 06 18:14:29 CET 2024" xsi:noNamespaceSchemaLocation="Archive.xsd">
+<sim disableStatisticStop="false" logDecimalSeparator="," logDelimiter=";" logPath="C:\Users\Simone\JMT" logReplaceMode="0" maxEvents="-1" maxSamples="10000000" name="ProjectFlow.jsimg" polling="1.0" xsi:noNamespaceSchemaLocation="SIMmodeldefinition.xsd">
+<userClass name="Arrivals" priority="0" referenceSource="Arrival" softDeadline="0.0" type="open"/>
+<node name="Arrival">
+<section className="RandomSource">
+<parameter array="true" classPath="jmt.engine.NetStrategies.ServiceStrategy" name="ServiceStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.ServiceStrategies.ServiceTimeStrategy" name="ServiceTimeStrategy">
+<subParameter classPath="jmt.engine.random.MMPP2Distr" name="Burst (MMPP2)"/>
+<subParameter classPath="jmt.engine.random.MMPP2Par" name="distrPar">
+<subParameter classPath="java.lang.Double" name="lambda0">
+<value>6000.0</value>
+</subParameter>
+<subParameter classPath="java.lang.Double" name="lambda1">
+<value>300.0</value>
+</subParameter>
+<subParameter classPath="java.lang.Double" name="sigma0">
+<value>0.002083333</value>
+</subParameter>
+<subParameter classPath="java.lang.Double" name="sigma1">
+<value>1.04166E-4</value>
+</subParameter>
+</subParameter>
+</subParameter>
+</parameter>
+</section>
+<section className="ServiceTunnel"/>
+<section className="Router">
+<parameter array="true" classPath="jmt.engine.NetStrategies.RoutingStrategy" name="RoutingStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.RoutingStrategies.RandomStrategy" name="Random"/>
+</parameter>
+</section>
+</node>
+<node name="Welcome Message">
+<classSoftDeadlines>
+<softDeadline>0.0</softDeadline>
+</classSoftDeadlines>
+<section className="Queue">
+<parameter classPath="java.lang.Integer" name="size">
+<value>-1</value>
+</parameter>
+<parameter array="true" classPath="java.lang.String" name="dropStrategies">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.String" name="dropStrategy">
+<value>drop</value>
+</subParameter>
+</parameter>
+<parameter classPath="jmt.engine.NetStrategies.QueueGetStrategies.FCFSstrategy" name="FCFSstrategy"/>
+<parameter array="true" classPath="jmt.engine.NetStrategies.QueuePutStrategy" name="QueuePutStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.QueuePutStrategies.TailStrategy" name="TailStrategy"/>
+</parameter>
+</section>
+<section className="Server">
+<parameter classPath="java.lang.Integer" name="maxJobs">
+<value>1</value>
+</parameter>
+<parameter array="true" classPath="java.lang.Integer" name="numberOfVisits">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.Integer" name="numberOfVisits">
+<value>1</value>
+</subParameter>
+</parameter>
+<parameter array="true" classPath="jmt.engine.NetStrategies.ServiceStrategy" name="ServiceStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.ServiceStrategies.ServiceTimeStrategy" name="ServiceTimeStrategy">
+<subParameter classPath="jmt.engine.random.Erlang" name="Erlang"/>
+<subParameter classPath="jmt.engine.random.ErlangPar" name="distrPar">
+<subParameter classPath="java.lang.Double" name="alpha">
+<value>288008.0</value>
+</subParameter>
+<subParameter classPath="java.lang.Long" name="r">
+<value>36</value>
+</subParameter>
+</subParameter>
+</subParameter>
+</parameter>
+</section>
+<section className="Router">
+<parameter array="true" classPath="jmt.engine.NetStrategies.RoutingStrategy" name="RoutingStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.RoutingStrategies.RandomStrategy" name="Random"/>
+</parameter>
+</section>
+</node>
+<node name="Seat Selection">
+<classSoftDeadlines>
+<softDeadline>0.0</softDeadline>
+</classSoftDeadlines>
+<section className="Queue">
+<parameter classPath="java.lang.Integer" name="size">
+<value>-1</value>
+</parameter>
+<parameter array="true" classPath="java.lang.String" name="dropStrategies">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.String" name="dropStrategy">
+<value>drop</value>
+</subParameter>
+</parameter>
+<parameter classPath="jmt.engine.NetStrategies.QueueGetStrategies.FCFSstrategy" name="FCFSstrategy"/>
+<parameter array="true" classPath="jmt.engine.NetStrategies.QueuePutStrategy" name="QueuePutStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.QueuePutStrategies.TailStrategy" name="TailStrategy"/>
+</parameter>
+</section>
+<section className="Server">
+<parameter classPath="java.lang.Integer" name="maxJobs">
+<value>19</value>
+</parameter>
+<parameter array="true" classPath="java.lang.Integer" name="numberOfVisits">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.Integer" name="numberOfVisits">
+<value>1</value>
+</subParameter>
+</parameter>
+<parameter array="true" classPath="jmt.engine.NetStrategies.ServiceStrategy" name="ServiceStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.ServiceStrategies.ServiceTimeStrategy" name="ServiceTimeStrategy">
+<subParameter classPath="jmt.engine.random.Exponential" name="Exponential"/>
+<subParameter classPath="jmt.engine.random.ExponentialPar" name="distrPar">
+<subParameter classPath="java.lang.Double" name="lambda">
+<value>239.1233999957092</value>
+</subParameter>
+</subParameter>
+</subParameter>
+</parameter>
+</section>
+<section className="Router">
+<parameter array="true" classPath="jmt.engine.NetStrategies.RoutingStrategy" name="RoutingStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.RoutingStrategies.RandomStrategy" name="Random"/>
+</parameter>
+</section>
+</node>
+<node name="Payment Processor">
+<classSoftDeadlines>
+<softDeadline>0.0</softDeadline>
+</classSoftDeadlines>
+<section className="Queue">
+<parameter classPath="java.lang.Integer" name="size">
+<value>-1</value>
+</parameter>
+<parameter array="true" classPath="java.lang.String" name="dropStrategies">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.String" name="dropStrategy">
+<value>drop</value>
+</subParameter>
+</parameter>
+<parameter classPath="jmt.engine.NetStrategies.QueueGetStrategies.FCFSstrategy" name="FCFSstrategy"/>
+<parameter array="true" classPath="jmt.engine.NetStrategies.QueuePutStrategy" name="QueuePutStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.QueuePutStrategies.TailStrategy" name="TailStrategy"/>
+</parameter>
+</section>
+<section className="Server">
+<parameter classPath="java.lang.Integer" name="maxJobs">
+<value>4</value>
+</parameter>
+<parameter array="true" classPath="java.lang.Integer" name="numberOfVisits">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.Integer" name="numberOfVisits">
+<value>1</value>
+</subParameter>
+</parameter>
+<parameter array="true" classPath="jmt.engine.NetStrategies.ServiceStrategy" name="ServiceStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.ServiceStrategies.ServiceTimeStrategy" name="ServiceTimeStrategy">
+<subParameter classPath="jmt.engine.random.Exponential" name="Exponential"/>
+<subParameter classPath="jmt.engine.random.ExponentialPar" name="distrPar">
+<subParameter classPath="java.lang.Double" name="lambda">
+<value>1203.1899998393621</value>
+</subParameter>
+</subParameter>
+</subParameter>
+</parameter>
+</section>
+<section className="Router">
+<parameter array="true" classPath="jmt.engine.NetStrategies.RoutingStrategy" name="RoutingStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.RoutingStrategies.RandomStrategy" name="Random"/>
+</parameter>
+</section>
+</node>
+<node name="Ticket Issuing">
+<classSoftDeadlines>
+<softDeadline>0.0</softDeadline>
+</classSoftDeadlines>
+<section className="Queue">
+<parameter classPath="java.lang.Integer" name="size">
+<value>-1</value>
+</parameter>
+<parameter array="true" classPath="java.lang.String" name="dropStrategies">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.String" name="dropStrategy">
+<value>drop</value>
+</subParameter>
+</parameter>
+<parameter classPath="jmt.engine.NetStrategies.QueueGetStrategies.FCFSstrategy" name="FCFSstrategy"/>
+<parameter array="true" classPath="jmt.engine.NetStrategies.QueuePutStrategy" name="QueuePutStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.QueuePutStrategies.TailStrategy" name="TailStrategy"/>
+</parameter>
+</section>
+<section className="Server">
+<parameter classPath="java.lang.Integer" name="maxJobs">
+<value>4</value>
+</parameter>
+<parameter array="true" classPath="java.lang.Integer" name="numberOfVisits">
+<refClass>Arrivals</refClass>
+<subParameter classPath="java.lang.Integer" name="numberOfVisits">
+<value>1</value>
+</subParameter>
+</parameter>
+<parameter array="true" classPath="jmt.engine.NetStrategies.ServiceStrategy" name="ServiceStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.ServiceStrategies.ServiceTimeStrategy" name="ServiceTimeStrategy">
+<subParameter classPath="jmt.engine.random.HyperExp" name="Hyperexponential"/>
+<subParameter classPath="jmt.engine.random.HyperExpPar" name="distrPar">
+<subParameter classPath="java.lang.Double" name="p">
+<value>0.203235</value>
+</subParameter>
+<subParameter classPath="java.lang.Double" name="lambda1">
+<value>537.042</value>
+</subParameter>
+<subParameter classPath="java.lang.Double" name="lambda2">
+<value>2149.71</value>
+</subParameter>
+</subParameter>
+</subParameter>
+</parameter>
+</section>
+<section className="Router">
+<parameter array="true" classPath="jmt.engine.NetStrategies.RoutingStrategy" name="RoutingStrategy">
+<refClass>Arrivals</refClass>
+<subParameter classPath="jmt.engine.NetStrategies.RoutingStrategies.RandomStrategy" name="Random"/>
+</parameter>
+</section>
+</node>
+<node name="Exit">
+<section className="JobSink"/>
+</node>
+<measure alpha="0.01" name="Welcome Message_Arrivals_Utilization" nodeType="station" precision="0.03" referenceNode="Welcome Message" referenceUserClass="Arrivals" type="Utilization" verbose="false"/>
+<measure alpha="0.01" name="Seat Selection_Arrivals_Utilization" nodeType="station" precision="0.03" referenceNode="Seat Selection" referenceUserClass="Arrivals" type="Utilization" verbose="false"/>
+<measure alpha="0.01" name="Payment Processor_Arrivals_Utilization" nodeType="station" precision="0.03" referenceNode="Payment Processor" referenceUserClass="Arrivals" type="Utilization" verbose="false"/>
+<measure alpha="0.01" name="Ticket Issuing_Arrivals_Utilization" nodeType="station" precision="0.03" referenceNode="Ticket Issuing" referenceUserClass="Arrivals" type="Utilization" verbose="false"/>
+<measure alpha="0.01" name="Arrivals_System Response Time" nodeType="" precision="0.03" referenceNode="" referenceUserClass="Arrivals" type="System Response Time" verbose="false"/>
+<measure alpha="0.01" name="Arrivals_System Drop Rate" nodeType="" precision="0.03" referenceNode="" referenceUserClass="Arrivals" type="System Drop Rate" verbose="false"/>
+<measure alpha="0.01" name="Arrival_Arrivals_Throughput" nodeType="station" precision="0.03" referenceNode="Arrival" referenceUserClass="Arrivals" type="Throughput" verbose="false"/>
+<connection source="Arrival" target="Welcome Message"/>
+<connection source="Welcome Message" target="Seat Selection"/>
+<connection source="Seat Selection" target="Payment Processor"/>
+<connection source="Payment Processor" target="Ticket Issuing"/>
+<connection source="Ticket Issuing" target="Exit"/>
+<blockingRegion name="FCRegion1000" type="default">
+<regionNode nodeName="Welcome Message"/>
+<regionNode nodeName="Seat Selection"/>
+<regionNode nodeName="Payment Processor"/>
+<regionNode nodeName="Ticket Issuing"/>
+<globalConstraint maxJobs="1000"/>
+<globalMemoryConstraint maxMemory="-1"/>
+<classConstraint jobClass="Arrivals" maxJobsPerClass="1000"/>
+<classMemoryConstraint jobClass="Arrivals" maxMemoryPerClass="-1"/>
+<dropRules dropThisClass="true" jobClass="Arrivals"/>
+<classWeight jobClass="Arrivals" weight="1"/>
+<classSize jobClass="Arrivals" size="1"/>
+<classSoftDeadline jobClass="Arrivals" softDeadline="0.0"/>
+</blockingRegion>
+</sim>
+<jmodel xsi:noNamespaceSchemaLocation="JModelGUI.xsd">
+<userClass color="#FF0000FF" name="Arrivals"/>
+<station name="Arrival">
+<position angle="0.0" rotate="false" x="25.0" y="93.0"/>
+</station>
+<station name="Welcome Message">
+<position angle="0.0" rotate="false" x="142.0" y="90.0"/>
+</station>
+<station name="Seat Selection">
+<position angle="0.0" rotate="false" x="282.0" y="90.0"/>
+</station>
+<station name="Payment Processor">
+<position angle="0.0" rotate="false" x="422.0" y="90.0"/>
+</station>
+<station name="Ticket Issuing">
+<position angle="0.0" rotate="false" x="562.0" y="90.0"/>
+</station>
+<station name="Exit">
+<position angle="0.0" rotate="false" x="731.0" y="93.0"/>
+</station>
+</jmodel>
+<results elapsedTime="4672" logDecimalSeparator="," logDelimiter=";" pollingInterval="1.0" xsi:noNamespaceSchemaLocation="Results.xsd">
+<measure alpha="0.99" analyzedSamples="40960" discardedSamples="0" finalValue="0.5847843398536946" name="Welcome Message_Arrivals_Utilization" nodeType="station" precision="0.03" referenceClass="Arrivals" referenceStation="Welcome Message" state="1" type="6">
+<sample lastIntervalAvgValue="0.5979100738840587" lowerBound="0.5564662004578276" meanValue="0.59766457038422" simulationTime="5.929149422110014" upperBound="0.6388629403106125"/>
+<sample lastIntervalAvgValue="0.5822965934614017" lowerBound="0.5687335341445517" meanValue="0.5847843398536946" simulationTime="6.182291496403475" upperBound="0.6008351455628375"/>
+</measure>
+<measure alpha="0.99" analyzedSamples="12800" discardedSamples="62420" finalValue="1.0" name="Seat Selection_Arrivals_Utilization" nodeType="station" precision="0.03" referenceClass="Arrivals" referenceStation="Seat Selection" state="1" type="6">
+<sample lastIntervalAvgValue="0.9994885003202044" meanValue="1.0" simulationTime="5.929175466907075"/>
+<sample lastIntervalAvgValue="1.0" meanValue="1.0" simulationTime="16.31021134255649"/>
+<sample lastIntervalAvgValue="1.0" lowerBound="0.9713515668682959" meanValue="1.0" simulationTime="16.420054038581053" upperBound="1.028648433131704"/>
+</measure>
+<measure alpha="0.99" analyzedSamples="25600" discardedSamples="2520" finalValue="0.9541358384694084" name="Payment Processor_Arrivals_Utilization" nodeType="station" precision="0.03" referenceClass="Arrivals" referenceStation="Payment Processor" state="1" type="6">
+<sample lastIntervalAvgValue="0.957046265942207" lowerBound="0.9356508861072773" meanValue="0.9541358384694084" simulationTime="5.570232913310575" upperBound="0.9726207908315395"/>
+<sample lastIntervalAvgValue="0.957046265942207" lowerBound="0.9356508861072773" meanValue="0.9541358384694084" simulationTime="5.570232913310575" upperBound="0.9726207908315395"/>
+</measure>
+<measure alpha="0.99" analyzedSamples="40960" discardedSamples="995" finalValue="0.850537672859506" name="Ticket Issuing_Arrivals_Utilization" nodeType="station" precision="0.03" referenceClass="Arrivals" referenceStation="Ticket Issuing" state="1" type="6">
+<sample lastIntervalAvgValue="0.8566798628097617" lowerBound="0.8368371952883393" meanValue="0.8726589885021425" simulationTime="5.928701313991894" upperBound="0.9084807817159457"/>
+<sample lastIntervalAvgValue="0.8286276900984396" lowerBound="0.8281094633306832" meanValue="0.850537672859506" simulationTime="7.012240243451063" upperBound="0.8729658823883287"/>
+</measure>
+<measure alpha="0.99" analyzedSamples="51200" discardedSamples="60185" finalValue="0.21986903914379113" name="Arrivals_System Response Time" nodeType="" precision="0.03" referenceClass="Arrivals" referenceStation="" state="1" type="15">
+<sample lastIntervalAvgValue="0.1977095623718822" meanValue="0.2108815799982884" simulationTime="5.928701313991894"/>
+<sample lastIntervalAvgValue="0.218585507641276" lowerBound="0.21365670012812715" meanValue="0.22116566503643736" simulationTime="16.310119057076697" upperBound="0.22867462994474758"/>
+<sample lastIntervalAvgValue="0.21965127545749902" lowerBound="0.2160698269845534" meanValue="0.21986903914379113" simulationTime="24.398383815704634" upperBound="0.22366825130302886"/>
+</measure>
+<measure alpha="0.99" analyzedSamples="71786" discardedSamples="4530" finalValue="1471.2170590606033" name="Arrivals_System Drop Rate" nodeType="" precision="0.03" referenceClass="Arrivals" referenceStation="" state="3" type="17">
+<sample lastIntervalAvgValue="1179.9136084431386" meanValue="1179.9136084431386" simulationTime="5.929247658420532"/>
+<sample lastIntervalAvgValue="1436.938065939014" meanValue="1343.4988226184842" simulationTime="16.30965329563403"/>
+<sample lastIntervalAvgValue="1477.4533960781694" lowerBound="1343.224083266727" meanValue="1434.8494752883832" simulationTime="29.51548439107909" upperBound="1539.8900498631162"/>
+<sample lastIntervalAvgValue="1471.1479890077794" lowerBound="1403.560913229497" meanValue="1471.2170590606033" simulationTime="43.06136838704642" upperBound="1545.7260198234721"/>
+<sample lastIntervalAvgValue="1457.9988826897602" lowerBound="1403.560913229497" meanValue="1471.2170590606033" simulationTime="53.32543660937051" upperBound="1545.7260198234721"/>
+<sample lastIntervalAvgValue="0.0" meanValue="1471.2170590606033" simulationTime="53.32543660937051"/>
+</measure>
+<measure alpha="0.99" analyzedSamples="40960" discardedSamples="60" finalValue="5974.189960088234" name="Arrival_Arrivals_Throughput" nodeType="station" precision="0.03" referenceClass="Arrivals" referenceStation="Arrival" state="1" type="5">
+<sample lastIntervalAvgValue="5963.244059279889" lowerBound="5765.119254720195" meanValue="5954.031440923861" simulationTime="5.929322973956858" upperBound="6155.743658997843"/>
+<sample lastIntervalAvgValue="6039.001326228901" lowerBound="5883.6699950424845" meanValue="5974.189960088234" simulationTime="6.866895213825147" upperBound="6067.538736412634"/>
+</measure>
+</results>
+</archive>
